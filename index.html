@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>第58回 秋田大学祭</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS変数：カラーパレット */
+        :root {
+            /* ベースカラー */
+            --white-base: rgba(255, 255, 255, 0.98); /* メインコンテンツ背景 */
+            --light-gray: rgba(248, 248, 248, 0.95); /* セクションアイテム背景 */
+            --text-color-dark: #333; /* 主なテキスト色 */
+            --text-color-light: #555; /* 副次的なテキスト色 */
+            --border-light: rgba(220, 220, 220, 0.7); /* 軽いボーダー色 */
+
+            /* 影 */
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+            /* 虹色テーマ（目に優しい単色） */
+            --color-red: #FF9AA2; /* 赤 */
+            --color-orange: #FFB7B2; /* オレンジ */
+            --color-yellow: #FFDAC1; /* 黄色 */
+            --color-green: #B5EAD7; /* 緑 */
+            --color-blue: #C7CEEA; /* 青 */
+            --color-indigo: #AEC6CF; /* 藍色 */
+            --color-purple: #D4A5A5; /* 紫 */
+        }
+
+        /* 全体設定 */
+        body {
+            margin: 0;
+            font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+            background-image: url('LINE_NOTE_250826_1.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: var(--text-color-dark);
+            line-height: 1.7;
+            overflow-x: hidden; /* 横スクロール防止 */
+            scroll-behavior: smooth; /* スムーズスクロール */
+        }
+
+        /* ヘッダー */
+        header {
+            position: relative;
+            width: 100%;
+            height: 1000px; /* 高さ調整 */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            /* ヘッダー背景画像 */
+            background-image: url('file:///Users/iwasakihiyori/Downloads/LINE_NOTE_250826_1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll; /* 背景は固定しない */
+        }
+
+        header::before { /* オーバーレイで文字を見やすく */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* 半透明の黒オーバーレイ */
+            z-index: 0;
+        }
+
+        header h1, header p {
+            position: relative; /* オーバーレイより手前に表示 */
+            z-index: 1;
+        }
+
+        header h1 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 3.8rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            color: #fff; /* 白字強調 */
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 0;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* ナビゲーションバー */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: var(--white-base);
+            padding: 0.8rem 1rem;
+            gap: 1rem;
+            box-shadow: var(--shadow-subtle);
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        nav a {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            text-decoration: none;
+            color: var(--text-color-light);
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent; /* ホバー時のボーダー用 */
+        }
+
+        nav a::after { /* ホバー・アクティブ時の下線アニメーション */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--color-blue); /* 青色を下線に */
+            border-radius: 2px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: var(--text-color-dark);
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px); /* 少し浮き上がる */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        nav a:hover::after {
+            width: 80%; /* ホバー時に下線が伸びる */
+        }
+
+        nav a.active {
+            color: var(--text-color-dark);
+            font-weight: 700;
+            background-color: var(--light-gray);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* 凹んだような影 */
+        }
+        nav a.active::after {
+            width: 100%; /* アクティブ時は完全に伸びる */
+            background-color: var(--color-red); /* アクティブ下線は赤 */
+        }
+
+
+        /* メインコンテンツ */
+        main {
+            max-width: 960px; /* 適度な幅に調整 */
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background-color: var(--white-base);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--border-light);
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        /* セクションタイトル */
+        h2 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 2.2rem;
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-dark); /* デフォルトはテキスト色 */
+        }
+
+        /* 各セクションタイトルのアクセントカラー */
+        #about h2::before { background-color: var(--color-red); }
+        #info h2::before { background-color: var(--color-orange); }
+        #events h2::before { background-color: var(--color-yellow); }
+        #access h2::before { background-color: var(--color-green); }
+        #contact h2::before { background-color: var(--color-blue); }
+
+        h2::before { /* 左側の太いライン */
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 80%;
+            border-radius: 3px;
+        }
+
+        h2::after { /* 下部の細いライン */
+            content: '';
+            position: absolute;
+            left: 1.2rem;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background-color: var(--text-color-dark); /* デフォルトはテキスト色 */
+            border-radius: 1px;
+        }
+        /* 各セクションタイトルの下線カラー */
+        #about h2::after { background-color: var(--color-red); }
+        #info h2::after { background-color: var(--color-orange); }
+        #events h2::after { background-color: var(--color-yellow); }
+        #access h2::after { background-color: var(--color-green); }
+        #contact h2::after { background-color: var(--color-blue); }
+
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-color-light);
+        }
+
+        /* リスト */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding: 0.8em 1em 0.8em 2.5em; /* アイコン分のパディング調整 */
+            margin-bottom: 0.8em;
+            background: var(--light-gray);
+            border-radius: 10px;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: var(--text-color-dark);
+        }
+        ul li:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        ul li::before { /* リストアイコン */
+            font-family: "Font Awesome 6 Free"; /* Font Awesomeを使用 */
+            font-weight: 900; /* Solidアイコン用 */
+            content: '\f0da'; /* Font Awesomeのアイコンコード（fa-caret-right） */
+            position: absolute;
+            left: 1em;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: var(--color-red); /* アイコンカラー */
+        }
+        /* 各リストアイテムアイコンのカラーを虹色に */
+        #events ul li:nth-child(1)::before { color: var(--color-orange); }
+        #events ul li:nth-child(2)::before { color: var(--color-yellow); }
+        #events ul li:nth-child(3)::before { color: var(--color-green); }
+        #events ul li:nth-child(4)::before { color: var(--color-blue); }
+        #events ul li:nth-child(5)::before { color: var(--color-indigo); }
+
+
+        strong {
+            font-weight: bold;
+            color: var(--text-color-dark); /* 強調文字は標準色 */
+        }
+
+        a {
+            color: var(--color-indigo); /* リンク色 */
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--color-purple);
+        }
+
+        /* 地図 */
+        iframe {
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            margin-top: 1.5rem;
+            max-width: 100%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--border-light);
+        }
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--light-gray);
+            color: var(--text-color-light);
+            margin-top: 3.5rem;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+            font-size: 0.95rem;
+            border-top: 2px solid var(--border-light);
+            font-family: 'M PLUS Rounded 1c', sans-serif; /* フッターも丸ゴシックに */
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                height: 350px;
+            }
+            header h1 {
+                font-size: 2.8rem;
+            }
+            header p {
+                font-size: 1.2rem;
+            }
+            nav {
+                padding: 0.7rem;
+                gap: 0.7rem;
+            }
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9em;
+            }
+            main {
+                margin: 2rem auto;
+                padding: 1.8rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            ul li {
+                padding: 0.7em 0.8em 0.7em 2em;
+            }
+            ul li::before {
+                left: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                height: 300px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            nav a {
+                width: 80%;
+                text-align: center;
+                padding: 0.6rem;
+            }
+            main {
+                padding: 1rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            ul li {
+                padding: 0.6em 0.8em 0.6em 2em;
+            }
+            ul li::before {
+                left: 0.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>第58回 秋田大学祭</h1>
+        <p>2025年10月18日（土）・19日（日）開催！</p>
+    </header>
+
+    <nav id="mainNav">
+        <a href="#about">概要</a>
+        <a href="#info">開催情報</a>
+        <a href="#events">イベント</a>
+        <a href="#access">アクセス</a>
+        <a href="#contact">お問い合わせ</a>
+    </nav>
+
+    <main>
+        <section id="about">
+            <h2>秋田大学祭について</h2>
+            <p>秋田大学最大のイベント、第58回秋田大学祭が今年も開催されます！学生の個性と情熱が詰まった2日間。模擬店、ライブパフォーマンス、ユニークな展示など、見どころ満載です。</p>
+            <p>地域の方々はもちろん、他大学の学生さん、ご家族連れの方も大歓迎！キャンパスが活気あふれるお祭りムードに包まれます。ぜひお越しください！</p>
+        </section>
+
+        <section id="info">
+            <h2>開催情報</h2>
+            <p><strong>日程：</strong>2025年10月18日（土）・19日（日）</p>
+            <p><strong>時間：</strong>10:00〜17:00（両日とも）</p>
+            <p><strong>場所：</strong>秋田大学 手形キャンパス</p>
+            <p><strong>住所：</strong>秋田県秋田市手形学園町1-1</p>
+        </section>
+
+        <section id="events">
+            <h2>主なイベント</h2>
+            <ul>
+                <li><strong>ミュージックライブ（ゲスト出演あり）</strong>
+                    <p>学生バンドやダンスチームによる熱いステージ！</p>
+                </li>
+                <li><strong>ゼミ・研究室の展示</strong>
+                    <p>学生たちの学びの成果を体験できる、ユニークな展示が盛りだくさん。</p>
+                </li>
+                <li><strong>模擬店グルメ＆フォトスポット</strong>
+                    <p>定番からB級グルメまで、美味しい模擬店が勢揃い！思い出に残るフォトスポットも。</p>
+                </li>
+                <li>その他、ワークショップ、スタンプラリーなど企画中！</li>
+            </ul>
+        </section>
+
+        <section id="access">
+            <h2>アクセス</h2>
+            <p>JR秋田駅から徒歩約15分、またはバスで約7分です。<br>※学祭当日は大変混雑が予想されます。公共交通機関のご利用にご協力をお願いいたします。</p>
+            <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3119.897371077717!2d140.1264878153096!3d39.72856237944747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f8f5c6e8f4c0c1b%3A0xe5a3f3a8b4b7c1c!2sAkita%20University!5e0!3m2!1sen!2sjp!4v1678901234567!5m2!1sen!2sjp"
+    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+        </section>
+
+        <section id="contact">
+            <h2>お問い合わせ</h2>
+            <p>秋田大学祭に関するご質問は、下記公式SNSまでお気軽にお問い合わせください。</p>
+            <p>Instagram: <a href="https://www.instagram.com/akita_univ_fes/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> @akita_univ_fes</a></p>
+            <p>X (旧Twitter): <a href="https://x.com/Akita_Univ_Fes" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> @Akita_Univ_Fes</a></p>
+            <p>最新情報はSNSでも随時発信していますので、ぜひフォローしてください！</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 秋田大学祭実行委員会 All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // スクロール時にアクティブなナビゲーションリンクを強調表示
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('#mainNav a');
+            const offset = 100; // スクロール位置調整用のオフセット
+
+            let currentSectionId = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                // スクロール位置がセクションの開始位置を過ぎ、かつセクションの終了位置より手前にある場合
+                if (pageYOffset >= sectionTop - offset && pageYOffset < sectionBottom - offset) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(currentSectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ページロード時にもアクティブ状態を設定 (リロードや直接URLアクセス時)
+        window.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('#mainNav a');
+            let initialSectionId = '';
+
+            if (window.location.hash) {
+                initialSectionId = window.location.hash.substring(1); // #を除去
+            } else if (sections.length > 0) {
+                // ハッシュがなければ最初のセクション（概要）をアクティブに
+                initialSectionId = sections.item(0).getAttribute('id');
+            }
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href').includes(initialSectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
